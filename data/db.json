@@ -1,0 +1,28 @@
+{
+    "blogs": [
+        { 
+            "title": "My new website",
+            "body": "loren ipsum", 
+            "author": "mario", 
+            "id": 1 
+        },
+        { 
+            "title": "Welcome to the cave", 
+            "body": "loren ipsum", 
+            "author": "yoshi", 
+            "id": 2 
+        },
+        { 
+            "title": "Diving in the clouds", 
+            "body": "loren ipsum", 
+            "author": "mario", 
+            "id": 3 
+        },
+        { 
+            "title": "The metaphisics of the Piranha Plant", 
+            "body": "loren ipsum", 
+            "author": "peach", 
+            "id": 4
+        }
+    ]
+}

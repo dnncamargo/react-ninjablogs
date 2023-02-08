@@ -1,0 +1,6 @@
+npx json-server --watch .\data\db.json --port 80
+
+/blogs      GET     Fetch All blogs
+/blogs{id}  GET     Fetch a single blog
+/blogs      POST    Add a New blog
+/blogs/{id} DELETE  Delete a blog
