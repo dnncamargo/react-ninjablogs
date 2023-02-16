@@ -3,15 +3,31 @@ import { useNavigate } from 'react-router-dom'
 
 const Create = () => {
 
-    const [title, setTitle] = useState('')
-    const [content, setContent] = useState('')
-    const [author, setAuthor] = useState('')
+    /** Estados dos campos de input */
+    const [input, setInput] = useState({
+        title: "",
+        author: "",
+        content: ""
+    })
+    // const [title, setTitle] = useState('')
+    // const [content, setContent] = useState('')
+    // const [author, setAuthor] = useState('')
+
+    /** Estados da página */
     const [isPending, setIsPending] = useState(false)
     const navigate = useNavigate();
 
+    const handleInput = (e) => {
+        const {name, value} = e.target;
+        setInput(prevState => ({
+            ...prevState,
+            [name] : value
+        }))
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const blog = { title, content, author};
+        const blog = { title: input.title, author: input.author, content: input.content};
 
         setIsPending(true)
 
@@ -35,20 +51,29 @@ const Create = () => {
         <form onSubmit={handleSubmit}>
             <label>Blog title:</label>
             <input 
+                name="title"
+                placeholder="Title"
                 type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={input.title}
+                onChange={handleInput}
+                // onChange={(e) => setTitle(e.target.value)}
                 required
                 />
             <textarea
+                name="content"
                 placeholder="Tell your story..."
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
+                value={input.content}
+                onChange={handleInput}
+                // onChange={(e) => setContent(e.target.value)}
                 required
                 ></textarea>
             <select
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}>
+                name="author"
+                placeholder="author"
+                value={input.author}
+                onChange={handleInput}
+                // onChange={(e) => setAuthor(e.target.value)}
+                >
                 <option value="mario">mario</option>
                 <option value="luigi">luigi</option>
                 <option value="peach">peach</option>

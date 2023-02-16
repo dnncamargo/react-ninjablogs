@@ -11,7 +11,7 @@ const useFetch = ( url ) => {
         // console.log("use effect run")
         // console.log(blogs)
         // dont use useEffect( async ()
-        setTimeout(() => {
+        // setTimeout(() => {
             fetch( url )
             .then(res => {
                 console.log(res)
@@ -31,7 +31,7 @@ const useFetch = ( url ) => {
                 setIsPending(false)
                 setError(err.message)
             })
-        }, 1000)
+        // }, 1000)
         // acionar a função no array de dependência apenas uma vez que a aplicação é executada
     },[ url ]);
 
