@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
+import { db } from './firebase-config'
+import { collection, addDoc } from 'firebase/firestore';
 
 const Create = () => {
+
+    /** Firebase */
+    const usersCollectionRef = collection(db, "blog");
 
     /** Estados dos campos de input */
     const [input, setInput] = useState({
@@ -25,10 +30,10 @@ const Create = () => {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const blog = { title: input.title, author: input.author, content: input.content};
-
+        await addDoc(usersCollectionRef, blog)
         setIsPending(true)
 
         fetch('http://localhost:8000/blogs/', {
