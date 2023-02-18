@@ -28,7 +28,7 @@ const Create = () => {
         setInput(prevState => ({
             ...prevState,
             [name] : value,
-            id: input.id + 1
+            id: Number(input.id) + 1
         }))
     }
 
