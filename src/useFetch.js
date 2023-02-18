@@ -1,29 +1,28 @@
 import { useState, useEffect } from "react";
 
 import { db } from './firebase-config'
-import { collection, getDocs, doc } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 
 // custom hooks must start with 'use'
 const useFetch = ( url ) => {
 
     const [data, setData] = useState( null );
-    const [blogList, setBlogList] = useState( null )
+    const [blogList, setBlogList] = useState( [] )
     const [isPending, setIsPending] = useState( true );
     const [error, setError] = useState( null );
 
-    const usersCollectionRef = collection(db, "blog");
+    
 
     useEffect(() => {
 
         const getBlogList = async () => {
-            const blogList = await getDocs(usersCollectionRef);
-            blogList.forEach(doc => {
-                console.log(doc.data())
-            })
-            console.log(blogList.docs)
+            const dataCollection = collection(db, "blog");
+            const querySnapshot = await getDocs(dataCollection);
+            const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            setBlogList(data)
         }
-
         getBlogList();
+        
 
         // console.log("use effect run")
         // console.log(blogs)
@@ -39,7 +38,7 @@ const useFetch = ( url ) => {
                 return res.json();
             })
             .then((data => {
-                //console.log(data)
+                console.log(data)
                 setData(data)
                 setIsPending(false)
                 setError(null)

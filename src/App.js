@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Create from "./Create";
 import BlogDetails from "./BlogDetails";
 import NotFound from "./NotFound";
+import MyComponent from "./MyComponent";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <div className="content">
                 <Routes>
                     <Route exact path="/" element={<Home />} />
+                    <Route exact path="/test" element={<MyComponent />} />
                     <Route path="/create" element={<Create />} />
                     <Route path="/blog/:id" element={<BlogDetails />} />
                     <Route path="*" element={<NotFound />} />

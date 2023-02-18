@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { db } from './firebase-config'
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc } from 'firebase/firestore';
 
 const Create = () => {
 
@@ -10,6 +10,7 @@ const Create = () => {
 
     /** Estados dos campos de input */
     const [input, setInput] = useState({
+        id: 0,
         title: "",
         author: "",
         content: ""
@@ -26,16 +27,21 @@ const Create = () => {
         const {name, value} = e.target;
         setInput(prevState => ({
             ...prevState,
-            [name] : value
+            [name] : value,
+            id: input.id + 1
         }))
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const blog = { title: input.title, author: input.author, content: input.content};
-        await addDoc(usersCollectionRef, blog)
+        //const blogID = doc(db, "blog", id)
+        const blog = { id: input.id, title: input.title, author: input.author, content: input.content};
+        await addDoc(usersCollectionRef, blog);
+        //console.log("Document written with ID: ", docRef.id);
         setIsPending(true)
 
+        // to add in JSON without duplicate id
+        delete blog.id;
         fetch('http://localhost:8000/blogs/', {
             method: 'POST',
             headers: {
