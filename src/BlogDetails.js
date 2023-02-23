@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const BlogDetails = () => {
 
     const { id } = useParams();
-    const { data: blog, error, isPending } = useFetch('http://localhost:8000/blogs/' + id)
+    const { data: blog, blogList, error, isPending } = useFetch('http://localhost:8000/blogs/' + id)
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -26,6 +26,15 @@ const BlogDetails = () => {
                     <br/><hr/><br/><br/>
                     <p>Written by { blog.author }</p>
                     <div>{ blog.content }</div>
+                    <button onClick={handleClick}>delete</button>
+                </article>
+            ) }
+            { blogList && (
+                <article>
+                    <h2>{ blogList.title }</h2>
+                    <br/><hr/><br/><br/>
+                    <p>Written by { blogList.author }</p>
+                    <div>{ blogList.content }</div>
                     <button onClick={handleClick}>delete</button>
                 </article>
             ) }

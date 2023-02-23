@@ -15,8 +15,12 @@ const useFetch = ( url ) => {
 
         const getBlogList = async () => {
             const dataCollection = collection(db, "blog");
-            const querySnapshot = await getDocs(dataCollection);
-            const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            const querySnapshot = await getDocs(dataCollection)
+            const data = querySnapshot.docs.map((doc) => ({ 
+                id: doc.id, ...doc.data() 
+            }));
+            console.log(data)
+            console.log(querySnapshot)
             setBlogList(data)
         }
         getBlogList();
