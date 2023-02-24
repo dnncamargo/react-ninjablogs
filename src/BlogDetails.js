@@ -16,6 +16,8 @@ const BlogDetails = () => {
         })
     }
 
+    console.log(blogList)
+
     return ( 
         <div className="blog-details">
             { isPending && <div>Loading...</div> }
